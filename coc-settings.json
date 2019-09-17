@@ -1,0 +1,24 @@
+{
+    "suggest.noselect": false,
+    "suggest.enablePreview": true,
+    "coc.preferences.colorSupport": true,
+    "languageserver": {
+        "ccls": {
+            "command": "ccls",
+            "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
+            "rootPatterns": [
+                ".ccls",
+                "compile_commands.json",
+                ".vim/",
+                ".git/",
+                ".hg/"
+            ],
+            "initializationOptions": {
+                "cache": {
+                    "directory": "/tmp/ccls"
+                },
+                "highlight": {"lsRanges": true}
+            }
+        }
+    }
+}

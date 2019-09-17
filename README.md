@@ -1,2 +1,9 @@
-# nvim-config
-My personal NeoVim config files
+# NeoVim Config
+
+My personal NeoVim configuration files.
+
+## Dependencies
+
+-   ccls
+-   node
+-   npm
