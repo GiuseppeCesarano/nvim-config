@@ -2,6 +2,7 @@
 call plug#begin()
     Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'honza/vim-snippets'
     Plug 'rakr/vim-one'
     Plug 'itchyny/lightline.vim'
     Plug 'rhysd/vim-clang-format'
