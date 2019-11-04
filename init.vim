@@ -91,7 +91,7 @@ hi default link LspCxxHlSymParameter Type
 "Change if theme changes
 hi default LspCxxHlGroupMemberVariable ctermfg=Red guifg=#E06C75 cterm=none gui=none
 hi default LspCxxHlSymVariable ctermfg=Red guifg=#E06C75 cterm=none gui=none
-hi default LspCxxHlGroupNamespace guifg=#e5c07b cterm=none  gui=none  
+hi default LspCxxHlGroupNamespace guifg=none c07b cterm=none  gui=none  
 
 "Formatters Settings
 let g:prettier#config#tab_width = 4
