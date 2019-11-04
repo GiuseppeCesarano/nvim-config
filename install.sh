@@ -1,5 +1,6 @@
 #!/bin/bash
 vim_implementation=""
+declare -a dependencys=('ccls' 'node' 'npm') 
 
 if hash nvim 2> /dev/null; then
     echo "NeoVim detected!"
@@ -38,16 +39,10 @@ PlugInstall_command="-c 'exe \"silent! PlugInstall\" | exe \"q!\" | exe \"q!\"'"
 eval $vim_implementation $PlugInstall_command  
 echo "Extensions installed"
 
-if ! hash ccls 2> /dev/null; then
-    echo "WARNING: Missing dependency ccls"
+for (( i = 0; i < ${#dependencys[@]}; i++ )); do
+    if ! hash ${dependencys[i]} 2>/dev/null; then
+    echo "WARNING: Missing dependency ${dependencys[i]}"
 fi
-
-if ! hash node 2> /dev/null; then
-    echo "WARNING: Missing dependency node"
-fi
-
-if ! hash npm 2> /dev/null; then
-    echo "WARNING: Missing dependency npm"
-fi
+done
 
 exit 0
