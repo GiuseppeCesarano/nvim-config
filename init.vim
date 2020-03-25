@@ -1,13 +1,12 @@
 "Plugins
 call plug#begin()
-    Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'honza/vim-snippets'
-    Plug 'rakr/vim-one'
+    Plug 'arcticicestudio/nord-vim'
     Plug 'itchyny/lightline.vim'
     Plug 'rhysd/vim-clang-format'
+    Plug 'conweller/findr.vim'
     Plug 'jackguo380/vim-lsp-cxx-highlight'
-    Plug 'junegunn/fzf.vim' 
     Plug 'prettier/vim-prettier', {
   \ 'do': 'npm install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
@@ -43,9 +42,9 @@ set backspace=indent,eol,start
 set signcolumn=yes
 
 "Shortcuts
-map <silent> <C-e> :NERDTreeToggle<CR> 
+map <silent> <C-e> :CocCommand explorer<CR> 
 map <silent> <C-i> :call Format()<CR>
-map <silent> <C-p> :FZF<CR>
+map <silent> <C-p> :Findr<CR>
 map <silent> <C-x> :CocList marketplace <CR>
 inoremap <silent><expr> <C-space> coc#refresh()
 
@@ -61,7 +60,7 @@ endif
 
 "Settings For LightLine
 let g:lightline = {
-    \'colorscheme': 'one',
+    \'colorscheme': 'nord',
     \'separator': { 'left': "\ue0b0", 'right': "\ue0b2"},
     \'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3"},
     \ 'active': {
@@ -72,17 +71,8 @@ let g:lightline = {
 
 "Enable Theme
 syntax on
-colorscheme one
+colorscheme nord
 set background=dark
-let g:one_allow_italics = 1 " I love italic for comments
-
-"Setting Font
-hi htmlArg gui=italic
-hi Comment gui=italic
-hi Type    gui=italic
-hi htmlArg cterm=italic
-hi Comment cterm=italic
-hi Type    cterm=italic
 
 "C/C++ Hightlight 
 let g:lsp_cxx_hl_use_text_props = 1
@@ -91,7 +81,7 @@ hi default link LspCxxHlSymParameter Type
 "Change if theme changes
 hi default LspCxxHlGroupMemberVariable ctermfg=Red guifg=#E06C75 cterm=none gui=none
 hi default LspCxxHlSymVariable ctermfg=Red guifg=#E06C75 cterm=none gui=none
-hi default LspCxxHlGroupNamespace guifg=none c07b cterm=none  gui=none  
+hi default LspCxxHlGroupNamespace guifg=none cterm=none  gui=none  
 
 "Formatters Settings
 let g:prettier#config#tab_width = 4

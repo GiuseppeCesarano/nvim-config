@@ -20,5 +20,6 @@
                 "highlight": {"lsRanges": true}
             }
         }
-    }
+    },
+    "explorer.icon.enableNerdfont": true
 }
