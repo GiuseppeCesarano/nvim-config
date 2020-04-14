@@ -2,7 +2,7 @@
 call plug#begin()
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'honza/vim-snippets'
-    Plug 'arcticicestudio/nord-vim'
+    Plug 'rakr/vim-one'
     Plug 'itchyny/lightline.vim'
     Plug 'rhysd/vim-clang-format'
     Plug 'conweller/findr.vim'
@@ -60,7 +60,7 @@ endif
 
 "Settings For LightLine
 let g:lightline = {
-    \'colorscheme': 'nord',
+    \'colorscheme': 'one',
     \'separator': { 'left': "\ue0b0", 'right': "\ue0b2"},
     \'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3"},
     \ 'active': {
@@ -71,7 +71,7 @@ let g:lightline = {
 
 "Enable Theme
 syntax on
-colorscheme nord
+colorscheme one
 set background=dark
 
 "C/C++ Hightlight 
