@@ -10,16 +10,16 @@ if hash nvim 2> /dev/null; then
 	curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     fi 
 else if hash vim 2> /dev/null; then
-	echo "Vim detected"	
-	vim_implementation=vim
-	if [ ! -f ~/.vim/autoload/plug.vim ]; then
-	    echo "Installing Plug-Vim for Vim"
-	    curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	fi
-    else	
-	echo "ERROR: Install Vim or Neovim"
-	exit 1
+    echo "Vim detected"	
+    vim_implementation=vim
+    if [ ! -f ~/.vim/autoload/plug.vim ]; then
+	echo "Installing Plug-Vim for Vim"
+	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     fi
+else	
+    echo "ERROR: Install Vim or Neovim"
+    exit 1
+fi
 fi
 
 echo "Copying settings"
@@ -41,8 +41,8 @@ echo "Extensions installed"
 
 for (( i = 0; i < ${#dependencys[@]}; i++ )); do
     if ! hash ${dependencys[i]} 2>/dev/null; then
-    echo "WARNING: Missing dependency ${dependencys[i]}"
-fi
+	echo "WARNING: Missing dependency ${dependencys[i]}"
+    fi
 done
 
 exit 0

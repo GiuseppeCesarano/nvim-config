@@ -1,15 +1,15 @@
 "Plugins
 call plug#begin()
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'honza/vim-snippets'
-    Plug 'rakr/vim-one'
-    Plug 'itchyny/lightline.vim'
-    Plug 'rhysd/vim-clang-format'
-    Plug 'conweller/findr.vim'
-    Plug 'jackguo380/vim-lsp-cxx-highlight'
-    Plug 'prettier/vim-prettier', {
-  \ 'do': 'npm install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'honza/vim-snippets'
+Plug 'rakr/vim-one'
+Plug 'itchyny/lightline.vim'
+Plug 'rhysd/vim-clang-format'
+Plug 'conweller/findr.vim'
+Plug 'jackguo380/vim-lsp-cxx-highlight'
+Plug 'prettier/vim-prettier', {
+	    \ 'do': 'npm install',
+	    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 call plug#end()
 
 "Row Numbers Settings
@@ -22,7 +22,7 @@ set hlsearch
 set smartcase
 set ignorecase
 set incsearch
- 
+
 "Spacesing Settings
 set autoindent	
 set shiftwidth=4
@@ -50,24 +50,24 @@ inoremap <silent><expr> <C-space> coc#refresh()
 
 "Enable Ture Color in vim 
 if (empty($TMUX))
-  if (has("nvim"))
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
-  if (has("termguicolors"))
-    set termguicolors
-  endif
+    if (has("nvim"))
+	let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+    endif
+    if (has("termguicolors"))
+	set termguicolors
+    endif
 endif
 
 "Settings For LightLine
 let g:lightline = {
-    \'colorscheme': 'one',
-    \'separator': { 'left': "\ue0b0", 'right': "\ue0b2"},
-    \'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3"},
-    \ 'active': {
-    \   'left': [ [ 'mode', 'paste' ],
-    \             ['readonly', 'filename', 'modified' ] ]
-    \ }
-\}
+	    \'colorscheme': 'one',
+	    \'separator': { 'left': "\ue0b0", 'right': "\ue0b2"},
+	    \'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3"},
+	    \ 'active': {
+	    \   'left': [ [ 'mode', 'paste' ],
+	    \             ['readonly', 'filename', 'modified' ] ]
+	    \ }
+	    \}
 
 "Enable Theme
 syntax on
