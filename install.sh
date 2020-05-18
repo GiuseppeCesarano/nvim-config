@@ -1,6 +1,6 @@
 #!/bin/bash
 vim_implementation=""
-declare -a dependencys=('ccls' 'node' 'npm') 
+declare -a dependencys=('node' 'npm') 
 
 if hash nvim 2> /dev/null; then
     echo "NeoVim detected!"
