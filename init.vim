@@ -12,6 +12,17 @@ Plug 'prettier/vim-prettier', {
 	    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 call plug#end()
 
+let g:coc_global_extensions = [
+	    \'coc-markdownlint',
+	    \'coc-highlight',
+	    \'coc-explorer',
+	    \'coc-git',
+	    \'coc-clangd',
+	    \'coc-cmake',
+	    \'coc-pairs',
+	    \'coc-snippets'
+	    \]
+
 "Row Numbers Settings
 set number	
 set showmatch	
