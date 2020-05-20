@@ -7,6 +7,8 @@ Plug 'itchyny/lightline.vim'
 Plug 'rhysd/vim-clang-format'
 Plug 'conweller/findr.vim'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
+Plug 'skywind3000/asynctasks.vim'
+Plug 'skywind3000/asyncrun.vim'
 Plug 'prettier/vim-prettier', {
 	    \ 'do': 'npm install',
 	    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
@@ -20,7 +22,8 @@ let g:coc_global_extensions = [
 	    \'coc-clangd',
 	    \'coc-cmake',
 	    \'coc-pairs',
-	    \'coc-snippets'
+	    \'coc-snippets',
+	    \'coc-tasks'
 	    \]
 
 "Row Numbers Settings
@@ -57,6 +60,7 @@ map <silent> <C-e> :CocCommand explorer<CR>
 map <silent> <C-i> :call Format()<CR>
 map <silent> <C-p> :Findr<CR>
 map <silent> <C-x> :CocList marketplace <CR>
+map <silent> <C-b> :CocList tasks<CR>
 inoremap <silent><expr> <C-space> coc#refresh()
 
 "Enable Ture Color in vim 
@@ -97,6 +101,9 @@ hi default LspCxxHlGroupNamespace guifg=none cterm=none  gui=none
 "Formatters Settings
 let g:prettier#config#tab_width = 4
 let g:clang_format#style_options = { "BasedOnStyle" : "WebKit"}
+
+" tasks config
+let g:asyncrun_open = 6
 
 "Custom Functions
 fu! Format()
