@@ -1,12 +1,12 @@
 "Plugins
 call plug#begin()
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'honza/vim-snippets'
 Plug 'rakr/vim-one'
 Plug 'itchyny/lightline.vim'
 Plug 'rhysd/vim-clang-format'
 Plug 'conweller/findr.vim'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
+Plug 'honza/vim-snippets'
 Plug 'skywind3000/asynctasks.vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'prettier/vim-prettier', {
@@ -62,6 +62,14 @@ map <silent> <C-p> :Findr<CR>
 map <silent> <C-x> :CocList marketplace <CR>
 map <silent> <C-b> :CocList tasks<CR>
 inoremap <silent><expr> <C-space> coc#refresh()
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <leader>rn <Plug>(coc-rename)
+
 
 "Enable Ture Color in vim 
 if (empty($TMUX))
@@ -98,6 +106,9 @@ hi default LspCxxHlGroupMemberVariable ctermfg=Red guifg=#E06C75 cterm=none gui=
 hi default LspCxxHlSymVariable ctermfg=Red guifg=#E06C75 cterm=none gui=none
 hi default LspCxxHlGroupNamespace guifg=none cterm=none  gui=none  
 
+"Comments in italic
+hi Comment cterm=italic gui=italic
+
 "Formatters Settings
 let g:prettier#config#tab_width = 4
 let g:clang_format#style_options = { "BasedOnStyle" : "WebKit"}
@@ -114,4 +125,12 @@ fu! Format()
 	:ClangFormat
 	echom "Code formatted using Clang-format"
     endif
+endfunction
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
 endfunction
