@@ -6,7 +6,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'rhysd/vim-clang-format'
 Plug 'conweller/findr.vim'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
-Plug 'honza/vim-snippets'
+Plug 'GiuseppeCesarano/vim-snippets'
 Plug 'skywind3000/asynctasks.vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'prettier/vim-prettier', {
@@ -23,6 +23,7 @@ let g:coc_global_extensions = [
 	    \'coc-cmake',
 	    \'coc-pairs',
 	    \'coc-snippets',
+	    \'coc-marketplace',
 	    \'coc-tasks'
 	    \]
 
