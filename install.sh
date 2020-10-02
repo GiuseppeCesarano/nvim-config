@@ -28,10 +28,10 @@ if [ $vim_implementation == "nvim" ]; then
     if [ ! -d ~/.config/nvim/ ]; then
 	mkdir ~/.config/nvim
     fi
-    cp coc-settings.json init.vim ~/.config/nvim
+    cp coc-settings.json init.vim tasks.ini ~/.config/nvim
 else
-    cp init.vim ~/.vimrc
-    cp coc-settings.json ~/.vim/
+    cp init.vim coc-settings.json tasks.ini ~/.vimrc
+    cp  ~/.vim/
 fi  
 
 PlugInstall_command="-c 'exe \"silent! PlugInstall\" | exe \"q!\" | exe \"q!\"'"
