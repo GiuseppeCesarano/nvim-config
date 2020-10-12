@@ -3,15 +3,11 @@ call plug#begin()
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'rakr/vim-one'
 Plug 'itchyny/lightline.vim'
-Plug 'rhysd/vim-clang-format'
 Plug 'conweller/findr.vim'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'GiuseppeCesarano/vim-snippets'
 Plug 'skywind3000/asynctasks.vim'
 Plug 'skywind3000/asyncrun.vim'
-Plug 'prettier/vim-prettier', {
-	    \ 'do': 'npm install',
-	    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 call plug#end()
 
 let g:coc_global_extensions = [
@@ -58,7 +54,7 @@ set signcolumn=yes
 
 "Shortcuts
 map <silent> <C-e> :CocCommand explorer<CR> 
-map <silent> <C-i> :call Format()<CR>
+map <silent> <C-i> <Plug>(coc-format)
 map <silent> <C-p> :Findr<CR>
 map <silent> <C-x> :CocList marketplace <CR>
 map <silent> <C-b> :CocList tasks<CR>
@@ -118,16 +114,6 @@ let g:clang_format#style_options = { "BasedOnStyle" : "WebKit"}
 let g:asyncrun_open = 6
 
 "Custom Functions
-fu! Format()
-    if exists(":PrettierAsync") 
-	:PrettierAsync<CR>
-	echom "Code formatted using Prettier"
-    else
-	:ClangFormat
-	echom "Code formatted using Clang-format"
-    endif
-endfunction
-
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
