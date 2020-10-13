@@ -1,13 +1,12 @@
 "Plugins
 call plug#begin()
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'rakr/vim-one'
-Plug 'itchyny/lightline.vim'
-Plug 'conweller/findr.vim'
-Plug 'jackguo380/vim-lsp-cxx-highlight'
-Plug 'GiuseppeCesarano/vim-snippets'
-Plug 'skywind3000/asynctasks.vim'
-Plug 'skywind3000/asyncrun.vim'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'rakr/vim-one'
+    Plug 'itchyny/lightline.vim'
+    Plug 'jackguo380/vim-lsp-cxx-highlight'
+    Plug 'GiuseppeCesarano/vim-snippets'
+    Plug 'skywind3000/asynctasks.vim'
+    Plug 'skywind3000/asyncrun.vim'
 call plug#end()
 
 let g:coc_global_extensions = [
@@ -55,7 +54,6 @@ set signcolumn=yes
 "Shortcuts
 map <silent> <C-e> :CocCommand explorer<CR> 
 map <silent> <C-i> <Plug>(coc-format)
-map <silent> <C-p> :Findr<CR>
 map <silent> <C-x> :CocList marketplace <CR>
 map <silent> <C-b> :CocList tasks<CR>
 inoremap <silent><expr> <C-space> coc#refresh()
@@ -105,10 +103,6 @@ hi default LspCxxHlGroupNamespace guifg=none cterm=none  gui=none
 
 "Comments in italic
 hi Comment cterm=italic gui=italic
-
-"Formatters Settings
-let g:prettier#config#tab_width = 4
-let g:clang_format#style_options = { "BasedOnStyle" : "WebKit"}
 
 " tasks config
 let g:asyncrun_open = 6
