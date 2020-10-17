@@ -3,5 +3,9 @@
 	"suggest.enablePreview": true,
 	"coc.preferences.colorSupport": true,
 	"explorer.icon.enableNerdfont": true,
-	"clangd.semanticHighlighting":true
+	"clangd.semanticHighlighting": true,
+	"markdownlint.config": {
+		"default": true,
+		"line_length": false
+	}
 }
