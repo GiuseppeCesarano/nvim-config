@@ -4,7 +4,7 @@ call plug#begin()
     Plug 'rakr/vim-one'
     Plug 'itchyny/lightline.vim'
     Plug 'jackguo380/vim-lsp-cxx-highlight'
-    Plug 'GiuseppeCesarano/vim-snippets'
+    Plug 'honza/vim-snippets'
     Plug 'skywind3000/asynctasks.vim'
     Plug 'skywind3000/asyncrun.vim'
 call plug#end()
