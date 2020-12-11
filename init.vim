@@ -7,6 +7,7 @@ call plug#begin()
     Plug 'honza/vim-snippets'
     Plug 'skywind3000/asynctasks.vim'
     Plug 'skywind3000/asyncrun.vim'
+    Plug 'tpope/vim-sleuth'
 call plug#end()
 
 let g:coc_global_extensions = [
