@@ -8,6 +8,7 @@ call plug#begin()
     Plug 'skywind3000/asynctasks.vim'
     Plug 'skywind3000/asyncrun.vim'
     Plug 'tpope/vim-sleuth'
+    Plug 'tpope/vim-commentary'
 call plug#end()
 
 let g:coc_global_extensions = [
