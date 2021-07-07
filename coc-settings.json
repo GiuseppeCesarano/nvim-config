@@ -1,11 +1,12 @@
 {
-	"suggest.noselect": false,
-	"suggest.enablePreview": true,
-	"coc.preferences.colorSupport": true,
-	"explorer.icon.enableNerdfont": true,
-	"clangd.semanticHighlighting": true,
-	"markdownlint.config": {
-		"default": true,
-		"line_length": false
-	}
+  "suggest.noselect": false,
+  "suggest.enablePreview": true,
+  "coc.preferences.colorSupport": true,
+  "explorer.icon.enableNerdfont": true,
+  "clangd.fallbackFlags": ["-std=c++17"],
+  "clangd.semanticHighlighting": true,
+  "markdownlint.config": {
+    "default": true,
+    "line_length": false
+  }
 }
