@@ -96,12 +96,14 @@ set background=dark
 
 "C/C++ Hightlight 
 let g:lsp_cxx_hl_use_text_props = 1
-hi default link LspCxxHlSymParameter Type
 
 "Change if theme changes
-hi default LspCxxHlGroupMemberVariable ctermfg=Red guifg=#E06C75 cterm=none gui=none
-hi default LspCxxHlSymVariable ctermfg=Red guifg=#E06C75 cterm=none gui=none
-hi default LspCxxHlGroupNamespace guifg=none cterm=none  gui=none  
+hi default LspCxxHlSymLocalVariable ctermfg=Red guifg=#E06C75 cterm=none gui=none
+hi default LspCxxHlSymUnknownStaticField ctermfg=Red guifg=#E06C75 cterm=none gui=none
+hi default LspCxxHlGroupNamespace ctermfg=Yellow guifg=#E5C07b cterm=none  gui=none  
+hi default LspCxxHlSymField ctermfg=Red guifg=#E06C75 cterm=none gui=none
+hi default LspCxxHlSymEnumConstant ctermfg=Cyan guifg=#56B6C2 cterm=none gui=none
+hi default LspCxxHlSymParameter ctermfg=Red guifg=#E06C75 cterm=none gui=none
 
 "Comments in italic
 hi Comment cterm=italic gui=italic
