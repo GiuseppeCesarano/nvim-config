@@ -3,7 +3,6 @@ call plug#begin()
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'rakr/vim-one'
     Plug 'itchyny/lightline.vim'
-    Plug 'jackguo380/vim-lsp-cxx-highlight'
     Plug 'honza/vim-snippets'
     Plug 'skywind3000/asynctasks.vim'
     Plug 'skywind3000/asyncrun.vim'
@@ -94,16 +93,9 @@ syntax on
 colorscheme one
 set background=dark
 
-"C/C++ Hightlight 
-let g:lsp_cxx_hl_use_text_props = 1
-
 "Change if theme changes
-hi default LspCxxHlSymLocalVariable ctermfg=Red guifg=#E06C75 cterm=none gui=none
-hi default LspCxxHlSymUnknownStaticField ctermfg=Red guifg=#E06C75 cterm=none gui=none
-hi default LspCxxHlGroupNamespace ctermfg=Yellow guifg=#E5C07b cterm=none  gui=none  
-hi default LspCxxHlSymField ctermfg=Red guifg=#E06C75 cterm=none gui=none
-hi default LspCxxHlSymEnumConstant ctermfg=Cyan guifg=#56B6C2 cterm=none gui=none
-hi default LspCxxHlSymParameter ctermfg=Red guifg=#E06C75 cterm=none gui=none
+hi default CocSem_namespace ctermfg=Yellow guifg=#E5C07b cterm=none  gui=none  
+hi default CocSem_enumMember ctermfg=Cyan guifg=#56B6C2 cterm=none gui=none
 
 "Comments in italic
 hi Comment cterm=italic gui=italic
