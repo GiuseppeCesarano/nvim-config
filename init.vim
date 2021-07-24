@@ -94,8 +94,16 @@ colorscheme one
 set background=dark
 
 "Change if theme changes
-hi default CocSem_namespace ctermfg=Yellow guifg=#E5C07b cterm=none  gui=none  
-hi default CocSem_enumMember ctermfg=Cyan guifg=#56B6C2 cterm=none gui=none
+hi default CocSem_parameter guifg=#E06c75
+hi default CocSem_variable guifg=#E06c75
+hi default CocSem_method guifg=#61AFEF
+hi default CocSem_function guifg=#61AFEF
+hi default CocSem_dependent guifg=#61AFEF
+hi default CocSem_namespace guifg=#E5C07b 
+hi default CocSem_typeParameter guifg=#E5C07b 
+hi default CocSem_class guifg=#E5C07b 
+hi default CocSem_enumMember guifg=#56B6C2 
+hi default CocSem_type guifg=#C678DD
 
 "Comments in italic
 hi Comment cterm=italic gui=italic
