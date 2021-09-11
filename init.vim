@@ -4,6 +4,8 @@ call plug#begin()
     Plug 'rakr/vim-one'
     Plug 'itchyny/lightline.vim'
     Plug 'honza/vim-snippets'
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'jackguo380/vim-lsp-cxx-highlight'
     Plug 'skywind3000/asynctasks.vim'
     Plug 'skywind3000/asyncrun.vim'
     Plug 'tpope/vim-sleuth'
@@ -18,10 +20,14 @@ let g:coc_global_extensions = [
 	    \'coc-clangd',
 	    \'coc-cmake',
 	    \'coc-pairs',
+	    \'coc-pyright',
 	    \'coc-snippets',
 	    \'coc-marketplace',
 	    \'coc-tasks'
 	    \]
+
+"Auto cmd
+autocmd FileType python let b:coc_root_patterns = ['.git', '.env', 'venv', '.venv', 'setup.cfg', 'setup.py', 'pyproject.toml', 'pyrightconfig.json']
 
 "Row Numbers Settings
 set number	
@@ -105,6 +111,17 @@ hi default CocSem_class guifg=#E5C07b
 hi default CocSem_enumMember guifg=#56B6C2 
 hi default CocSem_type guifg=#C678DD
 
+"C/C++ Hightlight 
+let g:lsp_cxx_hl_use_text_props = 1
+
+"Change if theme changes
+hi default LspCxxHlSymLocalVariable ctermfg=Red guifg=#E06C75 cterm=none gui=none
+hi default LspCxxHlSymUnknownStaticField ctermfg=Red guifg=#E06C75 cterm=none gui=none
+hi default LspCxxHlGroupNamespace ctermfg=Yellow guifg=#E5C07b cterm=none  gui=none  
+hi default LspCxxHlSymField ctermfg=Red guifg=#E06C75 cterm=none gui=none
+hi default LspCxxHlSymEnumConstant ctermfg=Cyan guifg=#56B6C2 cterm=none gui=none
+hi default LspCxxHlSymParameter ctermfg=Red guifg=#E06C75 cterm=none gui=none
+
 "Comments in italic
 hi Comment cterm=italic gui=italic
 
@@ -119,3 +136,13 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = {'python'},
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
+}
+EOF
