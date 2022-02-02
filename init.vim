@@ -5,7 +5,6 @@ call plug#begin()
     Plug 'itchyny/lightline.vim'
     Plug 'honza/vim-snippets'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-    Plug 'jackguo380/vim-lsp-cxx-highlight'
     Plug 'skywind3000/asynctasks.vim'
     Plug 'skywind3000/asyncrun.vim'
     Plug 'tpope/vim-sleuth'
@@ -100,27 +99,16 @@ colorscheme one
 set background=dark
 
 "Change if theme changes
-hi default CocSem_parameter guifg=#E06c75
-hi default CocSem_variable guifg=#E06c75
-hi default CocSem_method guifg=#61AFEF
-hi default CocSem_function guifg=#61AFEF
-hi default CocSem_dependent guifg=#61AFEF
-hi default CocSem_namespace guifg=#E5C07b 
-hi default CocSem_typeParameter guifg=#E5C07b 
-hi default CocSem_class guifg=#E5C07b 
-hi default CocSem_enumMember guifg=#56B6C2 
-hi default CocSem_type guifg=#C678DD
-
-"C/C++ Hightlight 
-let g:lsp_cxx_hl_use_text_props = 1
-
-"Change if theme changes
-hi default LspCxxHlSymLocalVariable ctermfg=Red guifg=#E06C75 cterm=none gui=none
-hi default LspCxxHlSymUnknownStaticField ctermfg=Red guifg=#E06C75 cterm=none gui=none
-hi default LspCxxHlGroupNamespace ctermfg=Yellow guifg=#E5C07b cterm=none  gui=none  
-hi default LspCxxHlSymField ctermfg=Red guifg=#E06C75 cterm=none gui=none
-hi default LspCxxHlSymEnumConstant ctermfg=Cyan guifg=#56B6C2 cterm=none gui=none
-hi default LspCxxHlSymParameter ctermfg=Red guifg=#E06C75 cterm=none gui=none
+hi default CocSemParameter guifg=#E06c75
+hi default CocSemVariable guifg=#E06c75
+hi default CocSemMethod guifg=#61AFEF
+hi default CocSemFunction guifg=#61AFEF
+hi default CocSemDependent guifg=#61AFEF
+hi default CocSemNamespace guifg=#E5C07b 
+hi default CocSemTypeParameter guifg=#E5C07b 
+hi default CocSemClass guifg=#E5C07b 
+hi default CocSemEnumMember guifg=#56B6C2 
+hi default CocSemType guifg=#C678DD
 
 "Comments in italic
 hi Comment cterm=italic gui=italic
