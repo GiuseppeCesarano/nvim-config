@@ -55,7 +55,7 @@ set ruler
 set hidden
 set undolevels=1000	
 set backspace=indent,eol,start	 
-set signcolumn=yes
+set signcolumn=number
 
 "Shortcuts
 map <silent> <C-e> :CocCommand explorer<CR> 
@@ -64,12 +64,14 @@ map <silent> <C-x> :CocList marketplace <CR>
 map <silent> <C-b> :CocList tasks<CR>
 inoremap <silent><expr> <C-space> coc#refresh()
 nnoremap <silent> K :call <SID>show_documentation()<CR>
+inoremap <silent><expr> <c-space> coc#refresh()
 
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <leader>rn <Plug>(coc-rename)
+nmap <leader>qf  <Plug>(coc-fix-current)
 
 
 "Enable Ture Color in vim 
