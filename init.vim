@@ -9,6 +9,7 @@ call plug#begin()
     Plug 'skywind3000/asyncrun.vim'
     Plug 'tpope/vim-sleuth'
     Plug 'tpope/vim-commentary'
+    Plug 'nvim-neorg/neorg' | Plug 'nvim-lua/plenary.nvim'
 call plug#end()
 
 let g:coc_global_extensions = [
@@ -128,8 +129,26 @@ function! s:show_documentation()
 endfunction
 
 lua <<EOF
+require('neorg').setup {
+  load = {
+        ["core.defaults"] = {},
+        ["core.norg.dirman"] = {
+            config = {
+                workspaces = {
+                    work = "~/Documents/norg/work",
+                    notes = "~/Documents/norg/notes",
+                    gtd = "~/Documents/norg/gtd",
+                }
+            }
+        },
+    ["core.gtd.base"] = {config= {
+	workspace = "gtd",
+	}},
+        ["core.norg.concealer"] = {}
+    }
+}
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = {'python'},
+  ensure_installed = {'python','norg'},
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,
