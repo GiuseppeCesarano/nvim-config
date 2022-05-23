@@ -74,7 +74,6 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <leader>rn <Plug>(coc-rename)
 nmap <leader>qf  <Plug>(coc-fix-current)
 
-
 "Enable Ture Color in vim 
 if (empty($TMUX))
     if (has("nvim"))
@@ -129,6 +128,13 @@ function! s:show_documentation()
 endfunction
 
 lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = {'python','norg'},
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
+}
 require('neorg').setup {
   load = {
         ["core.defaults"] = {},
@@ -138,20 +144,17 @@ require('neorg').setup {
                     work = "~/Documents/norg/work",
                     notes = "~/Documents/norg/notes",
                     gtd = "~/Documents/norg/gtd",
-                }
+                },
+		index = "inbox.norg"
             }
         },
-    ["core.gtd.base"] = {config= {
-	workspace = "gtd",
+    ["core.gtd.base"] = {
+	config = {
+	    workspace = "gtd",
 	}},
-        ["core.norg.concealer"] = {}
+        ["core.norg.concealer"] = {},
+	["core.export"] = {},
+	["core.export.markdown"] = {}
     }
-}
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = {'python','norg'},
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false,
-  },
 }
 EOF
