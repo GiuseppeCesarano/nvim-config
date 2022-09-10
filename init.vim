@@ -1,12 +1,10 @@
 "Plugins
 call plug#begin()
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'rakr/vim-one'
+    Plug 'joshdick/onedark.vim'
     Plug 'itchyny/lightline.vim'
     Plug 'honza/vim-snippets'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-    Plug 'skywind3000/asynctasks.vim'
-    Plug 'skywind3000/asyncrun.vim'
     Plug 'tpope/vim-sleuth'
     Plug 'tpope/vim-commentary'
     Plug 'nvim-neorg/neorg' | Plug 'nvim-lua/plenary.nvim'
@@ -22,8 +20,7 @@ let g:coc_global_extensions = [
 	    \'coc-pairs',
 	    \'coc-pyright',
 	    \'coc-snippets',
-	    \'coc-marketplace',
-	    \'coc-tasks'
+	    \'coc-marketplace'
 	    \]
 
 "Auto cmd
@@ -66,6 +63,8 @@ map <silent> <C-b> :CocList tasks<CR>
 inoremap <silent><expr> <C-space> coc#refresh()
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+
 
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -97,20 +96,15 @@ let g:lightline = {
 
 "Enable Theme
 syntax on
-colorscheme one
-set background=dark
+colorscheme onedark
+let g:onedark_terminal_italics = 1
 
 "Change if theme changes
-hi default CocSemParameter guifg=#E06c75
-hi default CocSemVariable guifg=#E06c75
-hi default CocSemMethod guifg=#61AFEF
-hi default CocSemFunction guifg=#61AFEF
-hi default CocSemDependent guifg=#61AFEF
-hi default CocSemNamespace guifg=#E5C07b 
-hi default CocSemTypeParameter guifg=#E5C07b 
-hi default CocSemClass guifg=#E5C07b 
-hi default CocSemEnumMember guifg=#56B6C2 
-hi default CocSemType guifg=#C678DD
+let g:coc_default_semantic_highlight_groups = 1
+ hi default CocSemNamespace guifg=#E5C07b 
+ hi default CocSemTypeParameter guifg=#E5C07b 
+ hi default CocSemClass guifg=#E5C07b 
+ hi default CocSemEnumMember guifg=#56B6C2 
 
 "Comments in italic
 hi Comment cterm=italic gui=italic
@@ -127,13 +121,19 @@ function! s:show_documentation()
   endif
 endfunction
 
+"Disable orrendus SQL complete
+let g:omni_sql_no_default_maps = 1
+
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
   ensure_installed = {'python','norg'},
   highlight = {
     enable = true,
-    additional_vim_regex_highlighting = false,
+    additional_vim_regex_highlighting = false
   },
+  indent = {
+    enable = true
+  }
 }
 require('neorg').setup {
   load = {
@@ -152,7 +152,7 @@ require('neorg').setup {
 	config = {
 	    workspace = "gtd",
 	}},
-        ["core.norg.concealer"] = {},
+	["core.norg.concealer"] = {},
 	["core.export"] = {},
 	["core.export.markdown"] = {}
     }
