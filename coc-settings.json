@@ -1,11 +1,13 @@
 {
+  "diagnostic.checkCurrentLine": true,
   "suggest.noselect": false,
   "suggest.enablePreview": true,
   "coc.preferences.colorSupport": true,
   "semanticTokens.filetypes": ["*"],
   "explorer.icon.enableNerdfont": true,
   "clangd.fallbackFlags": ["-std=c++20"],
-  "clangd.inlayHints.enable": false,
+  "inlayHint": false,
+  "marketplace.npmsio": true,
   "markdownlint.config": {
     "default": true,
     "line_length": false

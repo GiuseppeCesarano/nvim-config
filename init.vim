@@ -7,7 +7,7 @@ call plug#begin()
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'tpope/vim-sleuth'
     Plug 'tpope/vim-commentary'
-    Plug 'nvim-neorg/neorg' | Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-neorg/neorg'  | Plug 'nvim-lua/plenary.nvim'
 call plug#end()
 
 let g:coc_global_extensions = [
@@ -51,6 +51,7 @@ set updatetime=300
 set shortmess+=c
 set ruler	
 set hidden
+set nofoldenable    
 set undolevels=1000	
 set backspace=indent,eol,start	 
 set signcolumn=number
@@ -101,10 +102,9 @@ let g:onedark_terminal_italics = 1
 
 "Change if theme changes
 let g:coc_default_semantic_highlight_groups = 1
- hi default CocSemNamespace guifg=#E5C07b 
- hi default CocSemTypeParameter guifg=#E5C07b 
- hi default CocSemClass guifg=#E5C07b 
- hi default CocSemEnumMember guifg=#56B6C2 
+hi default CocSemNamespace guifg=#E5C07b 
+hi default CocSemClass guifg=#E5C07b 
+hi default CocSemEnumMember guifg=#56B6C2 
 
 "Comments in italic
 hi Comment cterm=italic gui=italic
@@ -125,6 +125,7 @@ endfunction
 let g:omni_sql_no_default_maps = 1
 
 lua <<EOF
+
 require'nvim-treesitter.configs'.setup {
   ensure_installed = {'python','norg'},
   highlight = {
@@ -134,27 +135,29 @@ require'nvim-treesitter.configs'.setup {
   indent = {
     enable = true
   }
-}
+};
 require('neorg').setup {
+  lazy_loading = true,
   load = {
         ["core.defaults"] = {},
         ["core.norg.dirman"] = {
             config = {
                 workspaces = {
                     work = "~/Documents/norg/work",
-                    notes = "~/Documents/norg/notes",
+                    studio = "~/Documents/norg/studio",
                     gtd = "~/Documents/norg/gtd",
                 },
 		index = "inbox.norg"
             }
         },
-    ["core.gtd.base"] = {
-	config = {
-	    workspace = "gtd",
-	}},
+	["core.gtd.base"] = {
+	    config = {
+		workspace = "gtd",
+	    }
+	},
 	["core.norg.concealer"] = {},
 	["core.export"] = {},
-	["core.export.markdown"] = {}
+	["core.export.markdown"] = {},
     }
 }
 EOF
