@@ -1,13 +1,13 @@
 "Plugins
 call plug#begin()
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'joshdick/onedark.vim'
-    Plug 'itchyny/lightline.vim'
-    Plug 'honza/vim-snippets'
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-    Plug 'tpope/vim-sleuth'
-    Plug 'tpope/vim-commentary'
-    Plug 'nvim-neorg/neorg'  | Plug 'nvim-lua/plenary.nvim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'joshdick/onedark.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'honza/vim-snippets'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 let g:coc_global_extensions = [
@@ -86,9 +86,7 @@ endif
 
 "Settings For LightLine
 let g:lightline = {
-	    \'colorscheme': 'one',
-	    \'separator': { 'left': "\ue0b0", 'right': "\ue0b2"},
-	    \'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3"},
+	    \'colorscheme': 'onedark',
 	    \ 'active': {
 	    \   'left': [ [ 'mode', 'paste' ],
 	    \             ['readonly', 'filename', 'modified' ] ]
@@ -99,6 +97,7 @@ let g:lightline = {
 syntax on
 colorscheme onedark
 let g:onedark_terminal_italics = 1
+let g:onedark_hide_endofbuffe = 1
 
 "Change if theme changes
 let g:coc_default_semantic_highlight_groups = 1
@@ -112,52 +111,32 @@ hi Comment cterm=italic gui=italic
 " tasks config
 let g:asyncrun_open = 6
 
+
+"Enable google calendar
+let g:calendar_google_calendar = 1
+let g:calendar_google_task = 1
+
 "Custom Functions
 function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
+    if (index(['vim','help'], &filetype) >= 0)
+	execute 'h '.expand('<cword>')
+    else
+	call CocAction('doHover')
+    endif
 endfunction
 
 "Disable orrendus SQL complete
 let g:omni_sql_no_default_maps = 1
 
 lua <<EOF
-
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = {'python','norg'},
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false
-  },
-  indent = {
-    enable = true
-  }
-};
-require('neorg').setup {
-  lazy_loading = true,
-  load = {
-        ["core.defaults"] = {},
-        ["core.norg.dirman"] = {
-            config = {
-                workspaces = {
-                    work = "~/Documents/norg/work",
-                    studio = "~/Documents/norg/studio",
-                    gtd = "~/Documents/norg/gtd",
-                },
-		index = "inbox.norg"
-            }
-        },
-	["core.gtd.base"] = {
-	    config = {
-		workspace = "gtd",
-	    }
-	},
-	["core.norg.concealer"] = {},
-	["core.export"] = {},
-	["core.export.markdown"] = {},
+    ensure_installed = {'python'},
+    highlight = {
+	enable = true,
+	additional_vim_regex_highlighting = false
+    },
+    indent = {
+	enable = true
     }
-}
+    };
 EOF
