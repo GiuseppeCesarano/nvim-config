@@ -8,10 +8,10 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'mickael-menu/zk-nvim'
 call plug#end()
 
 let g:coc_global_extensions = [
-	    \'coc-markdownlint',
 	    \'coc-highlight',
 	    \'coc-explorer',
 	    \'coc-git',
@@ -139,4 +139,25 @@ require'nvim-treesitter.configs'.setup {
 	enable = true
     }
     };
+require("zk").setup({
+  -- can be "telescope", "fzf" or "select" (`vim.ui.select`)
+  -- it's recommended to use "telescope" or "fzf"
+  picker = "select",
+
+  lsp = {
+    -- `config` is passed to `vim.lsp.start_client(config)`
+    config = {
+      cmd = { "zk", "lsp" },
+      name = "zk",
+      -- on_attach = ...
+      -- etc, see `:h vim.lsp.start_client()`
+    },
+
+    -- automatically attach buffers in a zk notebook that match the given filetypes
+    auto_attach = {
+      enabled = true,
+      filetypes = { "markdown" },
+    },
+  },
+});
 EOF
