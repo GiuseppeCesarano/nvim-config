@@ -9,7 +9,7 @@ Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'mickael-menu/zk-nvim'
-Plug 'ggandor/lightspeed.nvim'
+Plug 'ggandor/leap.nvim'
 call plug#end()
 
 let g:coc_global_extensions = [
@@ -141,7 +141,7 @@ require'nvim-treesitter.configs'.setup {
 	enable = true
     }
     };
-require("zk").setup({
+require('zk').setup({
   -- can be "telescope", "fzf" or "select" (`vim.ui.select`)
   -- it's recommended to use "telescope" or "fzf"
   picker = "select",
@@ -162,4 +162,5 @@ require("zk").setup({
     },
   },
 });
+require('leap').add_default_mappings();
 EOF
