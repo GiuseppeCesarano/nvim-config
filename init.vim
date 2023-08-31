@@ -9,6 +9,7 @@ Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'mickael-menu/zk-nvim'
+Plug 'ggandor/lightspeed.nvim'
 call plug#end()
 
 let g:coc_global_extensions = [
@@ -25,6 +26,7 @@ let g:coc_global_extensions = [
 
 "Auto cmd
 autocmd FileType python let b:coc_root_patterns = ['.git', '.env', 'venv', '.venv', 'setup.cfg', 'setup.py', 'pyproject.toml', 'pyrightconfig.json']
+au BufRead,BufNewFile *.comp                set filetype=glsl
 
 "Row Numbers Settings
 set number	
