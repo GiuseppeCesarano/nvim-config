@@ -26,7 +26,10 @@ let g:coc_global_extensions = [
 
 "Auto cmd
 autocmd FileType python let b:coc_root_patterns = ['.git', '.env', 'venv', '.venv', 'setup.cfg', 'setup.py', 'pyproject.toml', 'pyrightconfig.json']
-au BufRead,BufNewFile *.comp                set filetype=glsl
+augroup filetype_glsl
+    autocmd!
+    autocmd BufRead,BufNewFile *.glsl,*.vert,*.tesc,*.tese,*.frag,*.geom,*.comp set filetype=glsl
+augroup END
 
 "Row Numbers Settings
 set number	
