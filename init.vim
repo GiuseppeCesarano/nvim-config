@@ -17,6 +17,7 @@ let g:coc_global_extensions = [
 	    \'coc-explorer',
 	    \'coc-git',
 	    \'coc-clangd',
+	    \'coc-zig',
 	    \'coc-cmake',
 	    \'coc-pairs',
 	    \'coc-pyright',
