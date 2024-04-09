@@ -31,6 +31,10 @@ augroup filetype_glsl
     autocmd!
     autocmd BufRead,BufNewFile *.glsl,*.vert,*.tesc,*.tese,*.frag,*.geom,*.comp set filetype=glsl
 augroup END
+augroup filetype_wgsl
+    autocmd!
+    autocmd BufRead,BufNewFile *.wgsl set filetype=wgsl
+augroup END
 
 "Row Numbers Settings
 set number	
@@ -117,11 +121,6 @@ hi Comment cterm=italic gui=italic
 " tasks config
 let g:asyncrun_open = 6
 
-
-"Enable google calendar
-let g:calendar_google_calendar = 1
-let g:calendar_google_task = 1
-
 "Custom Functions
 function! s:show_documentation()
     if (index(['vim','help'], &filetype) >= 0)
@@ -145,26 +144,5 @@ require'nvim-treesitter.configs'.setup {
 	enable = true
     }
     };
-require('zk').setup({
-  -- can be "telescope", "fzf" or "select" (`vim.ui.select`)
-  -- it's recommended to use "telescope" or "fzf"
-  picker = "select",
-
-  lsp = {
-    -- `config` is passed to `vim.lsp.start_client(config)`
-    config = {
-      cmd = { "zk", "lsp" },
-      name = "zk",
-      -- on_attach = ...
-      -- etc, see `:h vim.lsp.start_client()`
-    },
-
-    -- automatically attach buffers in a zk notebook that match the given filetypes
-    auto_attach = {
-      enabled = true,
-      filetypes = { "markdown" },
-    },
-  },
-});
 require('leap').add_default_mappings();
 EOF
