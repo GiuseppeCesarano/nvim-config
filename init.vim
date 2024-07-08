@@ -7,8 +7,6 @@ Plug 'honza/vim-snippets'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-Plug 'mickael-menu/zk-nvim'
-Plug 'ggandor/leap.nvim'
 call plug#end()
 
 let g:coc_global_extensions = [
@@ -26,12 +24,9 @@ let g:coc_global_extensions = [
 
 "Auto cmd
 autocmd FileType python let b:coc_root_patterns = ['.git', '.env', 'venv', '.venv', 'setup.cfg', 'setup.py', 'pyproject.toml', 'pyrightconfig.json']
-augroup filetype_glsl
+augroup custom_filetype
     autocmd!
     autocmd BufRead,BufNewFile *.glsl,*.vert,*.tesc,*.tese,*.frag,*.geom,*.comp set filetype=glsl
-augroup END
-augroup filetype_wgsl
-    autocmd!
     autocmd BufRead,BufNewFile *.wgsl set filetype=wgsl
 augroup END
 
@@ -116,9 +111,6 @@ hi default COcSemTypeTypeParameter guifg=#E5C07b
 
 "Comments in italic
 hi Comment cterm=italic gui=italic
-
-" tasks config
-let g:asyncrun_open = 6
 
 "Custom Functions
 function! s:show_documentation()
