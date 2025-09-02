@@ -10,6 +10,8 @@ Plug 'nvim-tree/nvim-web-devicons'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 call plug#end()
 
 lua require('config')
@@ -52,8 +54,10 @@ set backspace=indent,eol,start
 set signcolumn=number
 
 "Shortcuts
-nmap <silent> <C-e> :NvimTreeToggle explorer<cr> 
+nmap <silent> <C-e> <cmd>NvimTreeToggle explorer<cr> 
 nmap <silent> <C-i> <cmd>lua vim.lsp.buf.format()<cr>
+nmap <silent> <C-p> <cmd>Telescope find_files<cr>
+nmap <silent> <C-S-p> <cmd>Telescope builtin<cr>
 nmap <silent> gd <cmd>lua vim.lsp.buf.definition()<cr>
 nmap <silent> gD <cmd>lua vim.lsp.buf.declaration()<cr>
 nmap <silent> gi <cmd>lua vim.lsp.buf.implementation()<cr>
@@ -72,15 +76,6 @@ let g:lightline = {'colorscheme': 'catppuccin'}
 
 "Comments in italic
 hi Comment cterm=italic gui=italic
-
-"Custom Functions
-function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-	execute 'h '.expand('<cword>')
-    else
-	call CocAction('doHover')
-    endif
-endfunction
 
 "Disable orrendus SQL complete
 let g:omni_sql_no_default_maps = 1
