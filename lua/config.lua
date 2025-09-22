@@ -1,15 +1,12 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-local lspconfig = require("lspconfig")
-lspconfig.lua_ls.setup({
-	capabilities = lsp_capabilities,
+vim.lsp.config('*', {
+	capabilities = require('cmp_nvim_lsp').default_capabilities(),
+	  root_markers = { '.git' },
 })
-lspconfig.zls.setup({
-	capabilities = lsp_capabilities,
-})
+vim.lsp.enable('zls')
+vim.lsp.enable('clangd')
 
 
 local function nvim_tree_attach(bufnr)
@@ -50,3 +47,4 @@ cmp.setup({
 	}
 	)
 })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Show diagnostics float" })
