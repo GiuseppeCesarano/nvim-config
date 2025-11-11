@@ -27,6 +27,16 @@ require("nvim-tree").setup({
 	on_attach = nvim_tree_attach
 })
 
+require("catppuccin").setup({
+    integrations = {
+        cmp = true,
+        nvimtree = true,
+	telescope = {
+	    enabled = true,
+	}
+    }
+})
+
 local cmp = require("cmp")
 cmp.setup({
 	snippet = {
@@ -44,6 +54,7 @@ cmp.setup({
 	}),
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp' },
+		{ name = 'vsnip' },
 	}
 	)
 })
