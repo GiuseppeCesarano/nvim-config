@@ -3,7 +3,17 @@ vim.g.loaded_netrwPlugin = 1
 
 vim.lsp.config('*', {
 	capabilities = require('cmp_nvim_lsp').default_capabilities(),
-	  root_markers = { '.git' },
+	root_markers = { '.git' },
+})
+vim.lsp.config('zls', {
+	capabilities = require('cmp_nvim_lsp').default_capabilities(),
+	root_markers = { '.git' },
+	settings = {
+		zls = {
+			enable_build_on_save = true,
+			semantic_tokens = "partial",
+		}
+	}
 })
 vim.lsp.enable('zls')
 vim.lsp.enable('clangd')
@@ -28,13 +38,13 @@ require("nvim-tree").setup({
 })
 
 require("catppuccin").setup({
-    integrations = {
-        cmp = true,
-        nvimtree = true,
-	telescope = {
-	    enabled = true,
+	integrations = {
+		cmp = true,
+		nvimtree = true,
+		telescope = {
+			enabled = true,
+		}
 	}
-    }
 })
 
 local cmp = require("cmp")
@@ -56,6 +66,6 @@ cmp.setup({
 		{ name = 'nvim_lsp' },
 		{ name = 'vsnip' },
 	}
-	)
+)
 })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Show diagnostics float" })
