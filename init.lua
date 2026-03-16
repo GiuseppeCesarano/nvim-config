@@ -25,11 +25,10 @@ require("lazy").setup({
                 flavour = "macchiato",
                 custom_highlights = function(colors)
                     return {
-                        Comment = { fg = colors.overlay2, style = { "italic" } }
+                        Comment = { fg = colors.overlay2, style = { "italic" } },
                     }
                 end,
                 integrations = {
-                    cmp = true,
                     nvimtree = true,
                     telescope = { enabled = true },
                     lualine = {
@@ -48,6 +47,46 @@ require("lazy").setup({
                 },
             })
             vim.cmd.colorscheme("catppuccin-macchiato")
+        end,
+    },
+
+    -- Completion Engine & Snippets
+    {
+        "hrsh7th/nvim-cmp",
+        dependencies = {
+            "hrsh7th/cmp-nvim-lsp",
+            "L3MON4D3/LuaSnip",
+            "saadparwaiz1/cmp_luasnip",
+            "rafamadriz/friendly-snippets",
+        },
+        config = function()
+            local cmp = require("cmp")
+            local luasnip = require("luasnip")
+
+            -- Load friendly-snippets
+            require("luasnip.loaders.from_vscode").lazy_load()
+
+            cmp.setup({
+                snippet = {
+                    expand = function(args)
+                        luasnip.lsp_expand(args.body)
+                    end,
+                },
+                mapping = cmp.mapping.preset.insert({
+                    ["<C-Space>"] = cmp.mapping.complete(),
+                    ["<Tab>"] = cmp.mapping.select_next_item(),
+                    ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+                    ["<CR>"] = cmp.mapping.confirm({ select = true }), 
+                }),
+                sources = cmp.config.sources({
+                    { name = "nvim_lsp" },
+                    { name = "luasnip" },
+                }),
+                window = {
+                    completion = cmp.config.window.bordered(),
+                    documentation = cmp.config.window.bordered(),
+                },
+            })
         end,
     },
 
@@ -76,7 +115,6 @@ require("lazy").setup({
     },
 
     { "nvim-tree/nvim-web-devicons", lazy = true },
-
     "tpope/vim-sleuth",
     "tpope/vim-commentary",
     "tpope/vim-fugitive",
@@ -87,75 +125,17 @@ require("lazy").setup({
             local function on_attach(bufnr)
                 local api = require("nvim-tree.api")
                 local function opts(desc)
-                    return {
-                        desc = "nvim-tree: " .. desc,
-                        buffer = bufnr,
-                        noremap = true,
-                        silent = true,
-                        nowait = true,
-                    }
+                    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
                 end
                 api.config.mappings.default_on_attach(bufnr)
-                vim.keymap.set("n", "l", api.node.open.edit,           opts("Open file or folder"))
+                vim.keymap.set("n", "l", api.node.open.edit,             opts("Open file or folder"))
                 vim.keymap.set("n", "h", api.node.navigate.parent_close, opts("Close parent or folder"))
-                vim.keymap.set("n", "<C-e>", api.tree.toggle,          opts("Toggle tree"))
+                vim.keymap.set("n", "<C-e>", api.tree.toggle,            opts("Toggle tree"))
             end
 
             require("nvim-tree").setup({
                 on_attach = on_attach,
-                renderer = {
-                    highlight_opened_files = "all",
-                },
-            })
-        end,
-    },
-
-    {
-        "neovim/nvim-lspconfig",
-        config = function()
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-            vim.lsp.config("zls", {
-                capabilities = capabilities,
-                root_markers = { ".git", "build.zig" },
-                settings = {
-                    zls = { enable_build_on_save = true },
-                },
-            })
-            vim.lsp.enable("zls")
-
-            vim.lsp.config("clangd", {
-                capabilities = capabilities,
-            })
-            vim.lsp.enable("clangd")
-        end,
-    },
-
-    {
-        "hrsh7th/nvim-cmp",
-        dependencies = {
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-vsnip",
-            "hrsh7th/vim-vsnip",
-        },
-        config = function()
-            local cmp = require("cmp")
-            cmp.setup({
-                snippet = {
-                    expand = function(args)
-                        vim.snippet.expand(args.body)
-                    end,
-                },
-                mapping = cmp.mapping.preset.insert({
-                    ["<C-b>"]     = cmp.mapping.scroll_docs(-4),
-                    ["<C-f>"]     = cmp.mapping.scroll_docs(4),
-                    ["<C-Space>"] = cmp.mapping.complete(),
-                    ["<CR>"]      = cmp.mapping.confirm({ select = true }),
-                }),
-                sources = cmp.config.sources({
-                    { name = "nvim_lsp" },
-                    { name = "vsnip" },
-                }),
+                renderer = { highlight_opened_files = "all" },
             })
         end,
     },
@@ -165,10 +145,7 @@ require("lazy").setup({
         dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
             require("telescope").setup({
-                defaults = require("telescope.themes").get_ivy({
-                    winblend = 10,
-                    border = false,
-                })
+                defaults = require("telescope.themes").get_ivy({ winblend = 10, border = false })
             })
         end,
     },
@@ -177,10 +154,7 @@ require("lazy").setup({
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
         config = function()
-            require("ibl").setup({
-                indent = { char = "|" },
-                scope = { enabled = true },
-            })
+            require("ibl").setup({ indent = { char = "|" }, scope = { enabled = true } })
         end,
     },
 
@@ -188,61 +162,43 @@ require("lazy").setup({
 })
 
 -- ============================================================
+-- LSP Config
+-- ============================================================
+-- We use cmp_nvim_lsp to tell the server we support completion
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+vim.lsp.config("zls", {
+    cmd          = { "zls" },
+    filetypes    = { "zig", "zir" },
+    root_markers = { "build.zig", "build.zig.zon", ".git" },
+    capabilities = capabilities,
+    settings = { zls = { enable_build_on_save = true } },
+})
+vim.lsp.enable("zls")
+
+vim.lsp.config("clangd", {
+    cmd          = { "clangd" },
+    filetypes    = { "c", "cpp", "objc", "objcpp", "cuda" },
+    capabilities = capabilities,
+    root_markers = { ".clangd", ".clang-tidy", ".clang-format", "compile_commands.json", "compile_flags.txt", ".git" },
+})
+vim.lsp.enable("clangd")
+
+-- ============================================================
 -- Options
 -- ============================================================
 local opt = vim.opt
-
--- Row numbers
 opt.number         = true
 opt.relativenumber = true
-opt.showmatch      = true
-opt.visualbell     = true
-
--- Search
-opt.hlsearch   = true
-opt.smartcase  = true
-opt.ignorecase = true
-opt.incsearch  = true
-
--- Indentation
-opt.autoindent  = true
-opt.shiftwidth  = 4
-opt.smartindent = true
-opt.smarttab    = true
-opt.softtabstop = 4
-opt.cindent     = true
-
--- Misc
-opt.cmdheight   = 2
-opt.updatetime  = 300
-opt.shortmess:append("c")
-opt.ruler       = true
-opt.hidden      = true
-opt.foldenable  = false
-opt.undolevels  = 1000
-opt.backspace   = { "indent", "eol", "start" }
-opt.signcolumn  = "number"
-
--- True colour
-opt.termguicolors = true
-
--- Disable terrible SQL completion maps
-vim.g.omni_sql_no_default_maps = 1
-
--- ============================================================
--- Filetype associations
--- ============================================================
-vim.api.nvim_create_augroup("custom_filetype", { clear = true })
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-    group   = "custom_filetype",
-    pattern = { "*.glsl", "*.vert", "*.tesc", "*.tese", "*.frag", "*.geom", "*.comp" },
-    command = "set filetype=glsl",
-})
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-    group   = "custom_filetype",
-    pattern = { "*.wgsl" },
-    command = "set filetype=wgsl",
-})
+opt.hlsearch       = true
+opt.smartcase      = true
+opt.ignorecase     = true
+opt.incsearch      = true
+opt.autoindent     = true
+opt.shiftwidth     = 4
+opt.softtabstop    = 4
+opt.termguicolors  = true
+opt.completeopt    = { "menu", "menuone", "noselect" }
 
 -- ============================================================
 -- Keymaps
@@ -252,15 +208,8 @@ local map = function(mode, lhs, rhs, opts)
     vim.keymap.set(mode, lhs, rhs, opts)
 end
 
-map("n", "<C-e>",   "<cmd>NvimTreeToggle<cr>")
-map("n", "<C-i>",   "<cmd>lua vim.lsp.buf.format()<cr>")
-map("n", "<C-p>",   "<cmd>Telescope find_files<cr>")
-map("n", "<C-S-p>", "<cmd>Telescope builtin<cr>")
-map("n", "gd",      "<cmd>lua vim.lsp.buf.definition()<cr>")
-map("n", "gD",      "<cmd>lua vim.lsp.buf.declaration()<cr>")
-map("n", "gi",      "<cmd>lua vim.lsp.buf.implementation()<cr>")
-map("n", "gr",      "<cmd>lua vim.lsp.buf.references()<cr>")
-map("n", "gs",      "<cmd>lua vim.lsp.buf.signature_help()<cr>")
-map("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>",       { silent = false })
-map("n", "<leader>qf", "<cmd>lua vim.lsp.buf.code_action()<cr>",  { silent = false })
-map("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<cr>")
+map("n", "<C-e>",      "<cmd>NvimTreeToggle<cr>")
+map("n", "<C-i>",      "<cmd>lua vim.lsp.buf.format()<cr>")
+map("n", "<C-p>",      "<cmd>Telescope find_files<cr>")
+map("n", "gd",         "<cmd>lua vim.lsp.buf.definition()<cr>")
+map("n", "<leader>e",  "<cmd>lua vim.diagnostic.open_float()<cr>")
