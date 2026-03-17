@@ -12,6 +12,7 @@ if not vim.loop.fs_stat(lazypath) then
     })
 end
 vim.opt.rtp:prepend(lazypath)
+
 -- ============================================================
 -- Plugin Spec
 -- ============================================================
@@ -208,10 +209,16 @@ for type, icon in pairs(signs) do
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
--- Also, let's make the hover windows look like the rest of your UI
 vim.diagnostic.config({
     virtual_text = true,
-    signs = true,
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = "󰅚 ",
+            [vim.diagnostic.severity.WARN]  = "󰀪 ",
+            [vim.diagnostic.severity.HINT]  = "󰌵 ",
+            [vim.diagnostic.severity.INFO]  = "󰋽 ",
+        },
+    },
     update_in_insert = false,
     underline = true,
     severity_sort = true,
@@ -243,7 +250,7 @@ opt.completeopt    = { "menu", "menuone", "noselect" }
 opt.signcolumn     = "number"
 
 -- ============================================================
--- Modern Keymaps (Direct Function References)
+-- Modern Keymaps
 -- ============================================================
 
 local telescope = require("telescope.builtin");
