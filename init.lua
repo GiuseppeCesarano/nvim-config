@@ -33,6 +33,7 @@ require("lazy").setup({
 		integrations = {
 		    nvimtree = true,
 		    telescope = { enabled = true },
+		    blink_indent = true,
 		    lualine = {
 			all = function(colors)
 			    return {
@@ -101,7 +102,7 @@ require("lazy").setup({
 		default = { 'lsp', 'path', 'snippets', 'buffer' },
 	    },
 
-	    signature = { enabled = true, window = { border = "rounded" } }
+	    signature = { enabled = true, window = { border = "none" } }
 	}, 
     }, 
 
@@ -166,11 +167,15 @@ require("lazy").setup({
     },
 
     {
-	"lukas-reineke/indent-blankline.nvim",
-	main = "ibl",
-	config = function()
-	    require("ibl").setup({ indent = { char = "|" }, scope = { enabled = true } })
-	end,
+        'saghen/blink.indent',
+        opts = {
+            static = {
+                char = "|", 
+            },
+	    scope = {
+                char = "|", 
+	    },
+        },
     },
 
     { "folke/zen-mode.nvim" },
