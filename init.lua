@@ -1,9 +1,16 @@
 -- ============================================================
--- Bootstjrap lazy.nvim
+-- Leader (must be set before lazy.nvim loads)
+-- ============================================================
+
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+-- ============================================================
+-- Bootstrap lazy.nvim
 -- ============================================================
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	vim.fn.system({
 		"git", "clone", "--filter=blob:none",
 		"https://github.com/folke/lazy.nvim.git",
@@ -131,10 +138,7 @@ require("lazy").setup({
 		end,
 	},
 
-	{ "nvim-tree/nvim-web-devicons", lazy = true },
 	"tpope/vim-sleuth",
-	"tpope/vim-commentary",
-	"tpope/vim-fugitive",
 
 	{
 		"nvim-tree/nvim-tree.lua",
@@ -225,12 +229,6 @@ vim.lsp.enable("lua_ls")
 -- Diagnostic Customization
 -- ============================================================
 
-local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌵 ", Info = "󰋽 " }
-for type, icon in pairs(signs) do
-	local hl = "DiagnosticSign" .. type
-	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-
 vim.diagnostic.config({
 	virtual_text = true,
 	signs = {
@@ -280,7 +278,7 @@ local telescope    = require("telescope.builtin");
 
 vim.keymap.set("n", "<C-e>", function() require("nvim-tree.api").tree.toggle() end,
 	{ silent = true, desc = "Toggle NvimTree" })
-vim.keymap.set("n", "<C-i>", function() vim.lsp.buf.format({ async = true }) end,
+vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({ async = true }) end,
 	{ silent = true, desc = "Format Buffer" })
 vim.keymap.set("n", "<C-p>", function() telescope.find_files() end, { silent = true, desc = "Telescope Files" })
 vim.keymap.set("n", "<C-S-p>", function() telescope.builtin() end, { silent = true, desc = "Telescope Pickers" })
@@ -288,7 +286,7 @@ vim.keymap.set("n", "<C-S-p>", function() telescope.builtin() end, { silent = tr
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { silent = true, desc = "LSP Definition" })
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { silent = true, desc = "LSP Declaration" })
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { silent = true, desc = "LSP Implementation" })
-vim.keymap.set("n", "gr", vim.lsp.buf.references, { silent = true, desc = "LSP References" })
+vim.keymap.set("n", "gr", vim.lsp.buf.references, { silent = true, nowait = true, desc = "LSP References" })
 vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { silent = true, desc = "LSP Signature Help" })
 
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { silent = false, desc = "LSP Rename" })
@@ -296,7 +294,7 @@ vim.keymap.set("n", "<leader>qf", vim.lsp.buf.code_action, { silent = false, des
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { silent = true, desc = "Open Diagnostic Float" })
 
 vim.keymap.set("n", "[", function() vim.diagnostic.jump({ count = -1, float = true }) end,
-	{ silent = true, desc = "Prev Diagnostic" })
+	{ silent = true, nowait = true, desc = "Prev Diagnostic" })
 
 vim.keymap.set("n", "]", function() vim.diagnostic.jump({ count = 1, float = true }) end,
-	{ silent = true, desc = "Next Diagnostic" })
+	{ silent = true, nowait = true, desc = "Next Diagnostic" })
