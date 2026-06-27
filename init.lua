@@ -1,11 +1,4 @@
 -- ============================================================
--- Leader (must be set before lazy.nvim loads)
--- ============================================================
-
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
--- ============================================================
 -- Bootstrap lazy.nvim
 -- ============================================================
 
@@ -278,7 +271,7 @@ local telescope    = require("telescope.builtin");
 
 vim.keymap.set("n", "<C-e>", function() require("nvim-tree.api").tree.toggle() end,
 	{ silent = true, desc = "Toggle NvimTree" })
-vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({ async = true }) end,
+vim.keymap.set("n", "<C-i>", function() vim.lsp.buf.format({ async = true }) end,
 	{ silent = true, desc = "Format Buffer" })
 vim.keymap.set("n", "<C-p>", function() telescope.find_files() end, { silent = true, desc = "Telescope Files" })
 vim.keymap.set("n", "<C-S-p>", function() telescope.builtin() end, { silent = true, desc = "Telescope Pickers" })
