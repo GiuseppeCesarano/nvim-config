@@ -177,6 +177,15 @@ require("lazy").setup({
 	},
 
 	{ "folke/zen-mode.nvim" },
+
+	{
+		"sindrets/diffview.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles", "DiffviewFileHistory" },
+		config = function()
+			require("diffview").setup()
+		end,
+	},
 })
 
 -- ============================================================
@@ -217,6 +226,15 @@ vim.lsp.config("lua_ls", {
 	},
 })
 vim.lsp.enable("lua_ls")
+
+vim.lsp.config("zk", {
+	cmd          = { "zk", "lsp" },
+	filetypes    = { "markdown" },
+	root_markers = { ".zk", ".git" },
+	capabilities = capabilities,
+	settings     = {},
+})
+vim.lsp.enable("zk")
 
 -- ============================================================
 -- Diagnostic Customization
